@@ -17,7 +17,7 @@ spec:
     #     value: "true"
     #   - name: ingress.hosts[0]
     #     value: guestbook.portal.linuxjedi.org
-    path: helm-guestbook
+    path: accord-dev
     repoURL: https://github.com/parsley42/accord-deploy.git
     targetRevision: HEAD
   syncPolicy:
