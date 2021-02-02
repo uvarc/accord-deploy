@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: accord-dev
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: accord-dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    # helm:
+    #   parameters:
+    #   - name: ingress.enabled
+    #     value: "true"
+    #   - name: ingress.hosts[0]
+    #     value: guestbook.portal.linuxjedi.org
+    path: helm-guestbook
+    repoURL: https://github.com/parsley42/accord-deploy.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
