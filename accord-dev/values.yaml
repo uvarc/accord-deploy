@@ -10,22 +10,21 @@ images:
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "develop"
+  mongo:
+    repository: mongo
+    tag: "latest"
+
+# Class for PVCs
+volumeClass: "longhorn"
+
+# This will need to be overridden at the cluster level
+appDomain: "accord.example.com"
+
+# NOTE: unused data from original template below
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-
-# Class for PVCs
-volumesClass: "longhorn"
-
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
 
 podAnnotations: {}
 

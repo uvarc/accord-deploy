@@ -1,4 +1,7 @@
 ---
+# Grant cluster-admin to default role in the namespace.
+# This means that user workloads should never run in the
+# main application namespace!
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:

@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+  namespace: {{ .Release.Namespace }}
+spec:
+#  serviceName: mongo
+#  replicas: 1
+#  updateStrategy:
+#    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mongo
+        image: "{{ .Values.images.mongo.repository }}:{{ .Values.images.mongo.tag }}"
+        args:
+          - "mongod"
+        ports:
+        - name: mongo
+          containerPort: 27017
+          protocol: TCP
+        volumeMounts:
+        - name: mongo-pvc
+          mountPath: /data/db
+        - name: mongodb-scripts
+          mountPath: /docker-entrypoint-initdb.d
+        env:
+        # Env for official dockerhub image
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: mongo-user
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: mongo-password
+        # Env for bitnami image
+        - name: MONGODB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: mongo-user
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: mongo-password
+      volumes:
+      - name: mongodb-scripts
+        configMap:
+          name: mongo-config
+          items:
+          - key: init_db.js
+            path: init_db.js
+      - name: mongo-pvc
+        persistentVolumeClaim:
+          claimName: mongo-pvc
