@@ -20,4 +20,3 @@ spec:
     path: accord
     repoURL: https://github.com/parsley42/accord-deploy.git
     targetRevision: HEAD
-  syncPolicy:
