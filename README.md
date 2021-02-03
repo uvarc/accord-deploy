@@ -10,3 +10,23 @@ The current convention is to store all secrets for the cluster in an `accord-clu
 ## Secrets in Git
 
 Secrets for ACCORD deployments are managed using Bitnami's [sealed secrets](https://github.com/bitnami-labs/sealed-secrets). For our deployments, each uniq cluster (David's **lj** home cluster, the AWS cluster) has it's own private key stored in the cluster and backed-up elsewhere. The "secrets" stored in Git are encrypted with the public key for the cluster. When the sealed secret is created on the cluster, the bitnami controller automatically creates the corresponding secret, which never appears in Git.
+
+## Adjusting Environments by Cluster
+
+In the event that an environment such as `accord-dev` is deployed to multiple clusters, cluster-specific values such as domain can be set as a parameter to the application, e.g.:
+```
+argocd app set accord -p appDomain="uvarc.io"
+```
+
+The preferred means of making this kind of cluster-specific change is to add it to the app definition for the cluster:
+
+```yaml
+# aws-accord-dev.yaml
+...
+  source:
+    helm:
+      parameters:
+      - name: appDomain
+        value: "uvarc.io"
+...
+```
