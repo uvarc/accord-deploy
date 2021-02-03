@@ -1,0 +1,17 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: accord-dev-mongo
+  namespace: accord-cluster
+spec:
+  encryptedData:
+    mongo-password: AgCYu/3jcP0pB64QEO9a1yMmurPebJ/XBb8oWM/8cuBcxWmpTygXGHNXgTVVBKBEdmZ4YfI1gitHtzVUMjf0199zj9eKA3UMeiXV7v/ezhtXOgytyX4Kz9QulXPHkFZbdgqk4+220Re57R+T1+5vdSlYDV0omjyVCuIA/EsNYd70oQTA1gO8yoo99dLgv9sLbA6eOPt2kO4KcIe1amN1E80BkfpoiTMAB8lXx41SEfjozfV/ZHGpFX+sYiiYd19+jWkPSiksoRE4DARQHUpkOkL6QTqsHU6Ml7rpHDxP/hLP40tRR/lm2JPf7oF5oPoh3mkKFUtCjK+/lHZQSv93QdxKKzHKj7v+toLp1gmMRm5ZQf0HA83ytSZjZH2WqM8BPlR2b+8mAWhE7/nQXEk2Mcyb5g/EezmY5d5zgSuS3pehf5CgrupMr4X9Tt2C8FPAWaXg8MO+Ha3xEryDbKiNW3YBKHufuHSVb2rwvwOZgkNmTL060Wwke8OXM7jKJVvm8ySo5yUhUVMqETDSXnaDVxpzxN3Vhpwj4rjFl9jq7EZ9RlAjDSBKwDIxCrKsAfwEp+1ALbVlX0rr7wRRcgrGIw/+7b6t4D3aUrv7qXqnLTI86wbgKcRFSo7DYkAIeDGeWXCeC3UsyC6XMGnXzh/rk/qYvqGxWdQfVA2PNXOo72Wkffuh/TohKRLD4PeIHBN8eiBQSawNP/Snr62qvH6O7w==
+    mongo-user: AgB9gCcX4JosAJ19j5J9LcKGyXMtA7PXg/CavpV8t1MKoyc1hUBjlKW2xrPTEFW9IKdBtYSkhv1BCVTcZqi6XGSX2cGl1uldh2qy0QBcwXc/0KlrYgpVnybiodWTwrnN5jysc81hTS5foShyHvA2HyvnRTYlxDEv93+HUzQlPIUUxStQXkG5SZ4Y8VspcFjSMW/goPrZTd3d5ft9sNjAuPMoKymKOEG3UZExq0w9XMYM2PJGzrcTZu/jh4K0c2TQFo/tet1B6/rznm1z4bixRhrOJQMwPITyRweRTzmJT56QA0lciVUcmT44L67TqrP3X+GeMl676VHN91VE5yud+1MnBOfXSBADVfVdTgFSAYA3QMlUD/MziXwnoc3PMTzepox1eU+XPQvVHxt99/OvJnz+0UsUaPzPHvuUUUgUyJl3BvoD4OVxlfpc3rmghTh1VMAqrZLQIQ+D4EncGCKWKsDqV4YC65EjlZQkwcnul7w5bUflX5vvc+sX+/HYtNEPCSu1CEUKVpTYhpWfS/XECkISU+1PDrcoHY/67E7AKcr/JTc4WXvdj7Ciq7jBextNCEfBCDLvE2TQ7gwDjqj/fBveJLdXHeA66WCCKpEuti76+3uCQTg3B9Qm+quiwEcbPjFLHhkXMoY4oR2WqRV35mY1r51L2UEp5Gud4SXtjGat2CmyPtAWIJRYI2QPJ1hE/h/UKogbRQ==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: accord-dev-mongo
+      namespace: accord-cluster
+    type: Opaque
+

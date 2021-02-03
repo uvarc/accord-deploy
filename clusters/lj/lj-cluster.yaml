@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: accord-cluster
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: accord-cluster
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: clusters/lj/templates
+    repoURL: https://github.com/parsley42/accord-deploy.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
