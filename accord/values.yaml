@@ -17,6 +17,10 @@ images:
 # Class for PVCs
 volumeClass: "longhorn"
 
+volumes:
+  mongo:
+    size: 40Gi
+
 # This will need to be overridden at the cluster level
 appDomain: "accord.example.com"
 
