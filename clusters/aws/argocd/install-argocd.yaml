@@ -2742,4 +2742,4 @@ spec:
       - backend:
           serviceName: argocd-server
           servicePort: http
-    host: argocd.uvarc.io
+    host: argocd-ui.uvarc.io
