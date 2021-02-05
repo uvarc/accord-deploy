@@ -16,7 +16,7 @@ spec:
       - name: volumes.mongo.size
         value: "5Gi"
     path: accord-dev
-    repoURL: https://github.com/parsley42/accord-deploy.git
+    repoURL: https://github.com/uvarc/accord-deploy.git
     targetRevision: HEAD
   syncPolicy:
     automated:

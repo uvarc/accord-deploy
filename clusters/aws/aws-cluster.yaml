@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: clusters/lj/templates
+    path: clusters/aws/templates
     repoURL: https://github.com/uvarc/accord-deploy.git
     targetRevision: HEAD
   syncPolicy:
