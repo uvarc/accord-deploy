@@ -4,20 +4,15 @@ metadata:
   name: mongo-config
   namespace: {{ .Release.Namespace }}
 data:
-  init_db.js: |
-    db = db.getSiblingDB("accord");
-    db.pods.insert({
-      pod_title: "Python 3 environment",
-      pod_sub_title: "Devlopment Tools",
-      pod_desc: "Python 3.6, bash",
-    });
-    db.pods.insert({
-      pod_title: "RStudio",
-      pod_sub_title: "IDE",
-      pod_desc: "R, Shiny, TensorFlow",
-    });
-    db.pods.insert({
-      pod_title: "Jupyter/Scipy",
-      pod_sub_title: "Interactive computing",
-      pod_desc: "Python, jQuery, Tornado",
-    });
+  MONGO_DB: "accord"
+  init-mongo.sh: |
+    mongo -- "$MONGO_DB" <<EOF
+        var rootUser = '$MONGO_INITDB_ROOT_USERNAME';
+        var rootPassword = '$MONGO_INITDB_ROOT_PASSWORD';
+        var admin = db.getSiblingDB('admin');
+        admin.auth(rootUser, rootPassword);
+
+        var user = '$MONGO_USER';
+        var passwd = '$MONGO_PASSWORD';
+        db.createUser({user: user, pwd: passwd, roles: ["readWrite"]});
+    EOF
