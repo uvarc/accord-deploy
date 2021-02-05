@@ -19,6 +19,10 @@ For our clusters, we're manually generating a key/cert and importing in to the c
 2. Save / share the private key as appropriate.
 3. Installed sealed secrets per docs
 
+### Sealing Secrets for AWS Cluster
+
+Currently there's an issue with using `kubeseal` without providing a cert. The workaround is to actually supply the cert, currently kept on the bastion. E.g.: `kubeseal --cert=/home/ansible/sealed-secrets/aws-ss.crt ...`.
+
 ## Adjusting Environments by Cluster
 
 In the event that an environment such as `accord-dev` is deployed to multiple clusters, cluster-specific values such as domain can be set as a parameter to the application, e.g.:
