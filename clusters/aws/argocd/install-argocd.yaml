@@ -2726,7 +2726,7 @@ spec:
       serviceAccountName: argocd-application-controller
 ## Added Ingress
 ---
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: argocd-server-http-ingress
@@ -2739,12 +2739,9 @@ spec:
   rules:
   - http:
       paths:
-      - pathType: ImplementationSpecific
-        backend:
-          service:
-            name: argocd-server
-            port:
-              name: http
+      - backend:
+          serviceName: argocd-server
+          servicePort: http
     host: argocd.uvarc.io
   tls:
   - hosts:
