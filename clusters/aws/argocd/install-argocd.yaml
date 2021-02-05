@@ -2734,7 +2734,6 @@ metadata:
   namespace: argocd
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   rules:
@@ -2744,7 +2743,3 @@ spec:
           serviceName: argocd-server
           servicePort: http
     host: argocd.uvarc.io
-  tls:
-  - hosts:
-    - argocd.uvarc.io
-    secretName: argocd-secret # do not change, this is provided by Argo CD
