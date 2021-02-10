@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: accord-service-configmap
+  namespace: {{ .Release.Namespace }}
+data:
+   BUILD_ENV: "prod"
+   PODLIB_NAMESPACE: "{{ .Release.Namespace }}"
+   PODLIB_INCLUSTER: "true"
+   PODLIB_CONFIG: "userpod"
+   CONNECTIONS_JSON: |
+      {"ENV": "prod", "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":"", "CLIENT_SECRET":""}}

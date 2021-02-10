@@ -8,4 +8,4 @@ data:
     {
      "production": false,
      "api": "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}/accord/api/"
-    }  
+    }
