@@ -20,7 +20,7 @@ spec:
       - image: "{{ .Values.images.accord_web.repository }}:{{ .Values.images.accord_web.tag }}"
         name: accord-web
         imagePullPolicy: "{{ .Values.images.accord_web.pullPolicy }}"
-        stdin: "{{ .Values.images.accord_web.stdin }}"
+        stdin: {{ .Values.images.accord_web.stdin }}
         volumeMounts:
         - name: accord-web-assets-config
           mountPath: /usr/share/nginx/html/assets/config
