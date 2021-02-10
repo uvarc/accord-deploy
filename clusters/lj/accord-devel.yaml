@@ -21,7 +21,7 @@ spec:
       - name: images.accord-service.tag
         value: "latest"
       - name: images.accord-service.stdin
-        value: true
+        value: "true"
     path: accord-dev
     repoURL: https://github.com/parsley42/accord-deploy.git
     targetRevision: HEAD
