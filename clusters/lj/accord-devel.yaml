@@ -1,3 +1,4 @@
+# Application definition for doing "in situ" development
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -15,8 +16,14 @@ spec:
       parameters:
       - name: volumes.mongo.size
         value: "5Gi"
+      - name: images.accord-service.repository
+        value: "quay.io/accord/docker-python-image"
+      - name: images.accord-service.tag
+        value: "latest"
+      - name: images.accord-service.stdin
+        value: true
     path: accord-dev
-    repoURL: https://github.com/uvarc/accord-deploy.git
+    repoURL: https://github.com/parsley42/accord-deploy.git
     targetRevision: HEAD
   syncPolicy:
     automated:

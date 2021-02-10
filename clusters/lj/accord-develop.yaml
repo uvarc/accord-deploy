@@ -1,0 +1,25 @@
+# Application definition to deploy the "develop" branch
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: accord-dev
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: accord-dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      parameters:
+      - name: volumes.mongo.size
+        value: "5Gi"
+    path: accord-dev
+    repoURL: https://github.com/uvarc/accord-deploy.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -5,11 +5,14 @@ images:
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "develop"
+    stdin: false
   accord-service:
     repository: quay.io/accord/accord-service
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "develop"
+    # For doing in-cluster development
+    stdin: false
   mongo:
     repository: mongo
     tag: "latest"
