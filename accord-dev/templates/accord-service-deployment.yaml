@@ -20,7 +20,7 @@ spec:
       - image: "{{ .Values.images.accord_service.repository }}:{{ .Values.images.accord_service.tag }}"
         name: accord-service
         imagePullPolicy: "{{ .Values.images.accord_service.pullPolicy }}"
-        stdin: {{ .Values.images.accord_web.stdin }}
+        stdin: {{ .Values.images.accord_service.stdin }}
         envFrom:
         - configMapRef:
             name: accord-service-configmap
