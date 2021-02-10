@@ -14,6 +14,10 @@ spec:
   source:
     helm:
       parameters:
+      - name: "appDomain"
+        value: "portal.linuxjedi.org"
+      - name: "envUrl"
+        value: "accord-devel"
       - name: volumes.mongo.size
         value: "5Gi"
       - name: images.accord-service.repository

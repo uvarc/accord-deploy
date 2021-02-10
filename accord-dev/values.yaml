@@ -1,4 +1,13 @@
 
+# Override this with your own domain
+appDomain: "example.com"
+
+# Override this by environment. The main UI will have the URL
+# <envUrl>.<appDomain>, e.g. "accord.example.com". User pods will
+# have this in the final dashed segment,
+# e.g. "theia-python-mst3k-abcde-accord.example.com".
+envUrl: "accord"
+
 images:
   accord-web:
     repository: quay.io/accord/accord-web
