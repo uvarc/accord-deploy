@@ -20,11 +20,11 @@ spec:
         value: "accord-devel"
       - name: volumes.mongo.size
         value: "5Gi"
-      - name: images.accord-service.repository
+      - name: images.accord_service.repository
         value: "quay.io/accord/docker-python-image"
-      - name: images.accord-service.tag
+      - name: images.accord_service.tag
         value: "latest"
-      - name: images.accord-service.stdin
+      - name: images.accord_service.stdin
         value: "true"
     path: accord-dev
     repoURL: https://github.com/parsley42/accord-deploy.git

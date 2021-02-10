@@ -17,14 +17,14 @@ spec:
         app: accord-web
     spec:
       containers:
-        - image: "{{ .Values.images.accord-web.repository }}:{{ .Values.images.accord-web.tag }}"
-          name: accord-web
-          imagePullPolicy: {{ .Values.images.accord-web.pullPolicy }}
-          stdin: {{ .Values.images.accord-web.stdin }}
-          volumeMounts:
-            - name: accord-web-assets-config
-              mountPath: /usr/share/nginx/html/assets/config
-      volumes:
+      - image: "{{ .Values.images.accord_web.repository }}:{{ .Values.images.accord_web.tag }}"
+        name: accord-web
+        imagePullPolicy: "{{ .Values.images.accord_web.pullPolicy }}"
+        stdin: "{{ .Values.images.accord_web.stdin }}"
+        volumeMounts:
         - name: accord-web-assets-config
-          configMap:
-            name: accord-web-assets-config
+          mountPath: /usr/share/nginx/html/assets/config
+      volumes:
+      - name: accord-web-assets-config
+        configMap:
+          name: accord-web-assets-config
