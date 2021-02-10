@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: accord-web-assets-config
-  namespace: accord
+  namespace: {{ .Release.Namespace }}
 data:
   config.json: |
     {
