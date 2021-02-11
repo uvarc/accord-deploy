@@ -1,3 +1,25 @@
+---
+# mongo configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+  namespace: {{ .Release.Namespace }}
+data:
+  MONGO_DB: "accord"
+  init-mongo.sh: |
+    mongo -- "$MONGO_DB" <<EOF
+        var rootUser = '$MONGO_INITDB_ROOT_USERNAME';
+        var rootPassword = '$MONGO_INITDB_ROOT_PASSWORD';
+        var admin = db.getSiblingDB('admin');
+        admin.auth(rootUser, rootPassword);
+
+        var user = '$MONGO_USER';
+        var passwd = '$MONGO_PASSWORD';
+        db.createUser({user: user, pwd: passwd, roles: ["readWrite"]});
+    EOF
+---
+# mongo deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -68,3 +90,33 @@ spec:
       - name: mongo-pvc
         persistentVolumeClaim:
           claimName: mongo-pvc
+---
+# mongo volume claim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{ .Values.volumeClass }}
+  resources:
+    requests:
+      storage: {{ .Values.volumes.mongo.size }}
+---
+# mongo service definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: mongo
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  clusterIP: None
+  selector:
+    app: mongo

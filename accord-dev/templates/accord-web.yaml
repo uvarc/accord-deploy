@@ -1,4 +1,18 @@
 ---
+# accord-web assets configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: accord-web-assets-config
+  namespace: {{ .Release.Namespace }}
+data:
+  config.json: |
+    {
+     "production": false,
+     "api": "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}/accord/api/"
+    }
+---
+# accord-web deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,3 +42,20 @@ spec:
       - name: accord-web-assets-config
         configMap:
           name: accord-web-assets-config
+---
+# accord-web service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: accord-web
+  name: accord-web-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports:
+    - name: "accord-web-port"
+      port: 80
+      protocol: TCP
+      targetPort: 4200
+  selector:
+    app: accord-web
