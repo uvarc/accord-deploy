@@ -52,6 +52,7 @@ userPods:
       prefix: "/project"
       format: "groupname"
 
+# Note: most of the original ingress definition is currently unused.
 ingress:
 #  enabled: false
   annotations:
