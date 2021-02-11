@@ -59,3 +59,23 @@ spec:
       targetPort: 4200
   selector:
     app: accord-web
+---
+# accord-web ingress definition
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: accord-web
+  namespace: {{ .Release.Namespace }}
+spec:
+  rules:
+  - host: "{{ .Values.envUrl }}.{{ .Values.appDomain }}"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: accord-web-service
+          servicePort: 80

@@ -99,3 +99,23 @@ spec:
       targetPort: 5000
   selector:
     app: accord-service
+---
+# accord-service ingress definition
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: accord-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  rules:
+  - host: "{{ .Values.envUrl }}.{{ .Values.appDomain }}"
+    http:
+      paths:
+      - path: /accord/api/
+        backend:
+          serviceName: accord-service-service
+          servicePort: 80
