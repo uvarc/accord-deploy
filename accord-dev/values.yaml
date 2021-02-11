@@ -25,6 +25,9 @@ images:
   mongo:
     repository: mongo
     tag: "latest"
+  envoy:
+    repository: "docker.io/envoyproxy/envoy"
+    tag: "v1.16-latest"
 
 # Class for PVCs
 volumeClass: "longhorn"
@@ -33,8 +36,21 @@ volumes:
   mongo:
     size: 40Gi
 
-# This will need to be overridden at the cluster level
-appDomain: "accord.example.com"
+# User Pod Configuration
+userPods:
+  envoy:
+    externalPort: "10000"
+    adminPort: "9901"
+    match: {}
+  storage:
+    home:
+      type: "hostPath"
+      prefix: "/home"
+      format: "short"
+    project:
+      type: "hostPath"
+      prefix: "/project"
+      format: "groupname"
 
 # NOTE: unused data from original template below
 

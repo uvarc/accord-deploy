@@ -12,23 +12,35 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
+    path: accord-dev
+    repoURL: https://github.com/parsley42/accord-deploy.git
+    targetRevision: HEAD
     helm:
       parameters:
       - name: "appDomain"
         value: "portal.linuxjedi.org"
       - name: "envUrl"
         value: "accord-devel"
-      - name: volumes.mongo.size
-        value: "5Gi"
-      - name: images.accord_service.repository
-        value: "quay.io/accord/docker-python-image"
-      - name: images.accord_service.tag
-        value: "latest"
-      - name: images.accord_service.stdin
-        value: "true"
-    path: accord-dev
-    repoURL: https://github.com/parsley42/accord-deploy.git
-    targetRevision: HEAD
+      values: |
+        volumes:
+          mongo:
+            size: "5Gi"
+        images:
+          accord_service:
+            repository: "quay.io/accord/docker-python-image"
+            tag: "latest"
+            stdin: true
+        userPods:
+          storage:
+            home:
+              prefix: "/remote/home"
+            project:
+              type: "none"
+          envoy:
+            match:
+              headers:
+                name: "ssl-client-subject-dn"
+                prefix_match: "CN=<SHORTUSER>,"
   syncPolicy:
     automated:
       prune: true

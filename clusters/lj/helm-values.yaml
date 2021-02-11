@@ -1,0 +1,21 @@
+appDomain: "portal.linuxjedi.org"
+envUrl: "accord-devel"
+volumes:
+  mongo:
+    size: "5Gi"
+images:
+  accord_service:
+    repository: "quay.io/accord/docker-python-image"
+    tag: "latest"
+    stdin: true
+userPods:
+  storage:
+    home:
+      prefix: "/remote/home"
+    project:
+      type: "none"
+  envoy:
+    match:
+      headers:
+        name: 'ssl-client-subject-dn'
+        prefix_match: 'CN=<SHORTUSER>,'
