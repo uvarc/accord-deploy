@@ -1,0 +1,16 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: ljreg
+  namespace: accord-dev
+spec:
+  encryptedData:
+    .dockerconfigjson: AgAlDU6fD+B7BY7A7HLe9HFQD1dR2io7UX9A5L8c6tNONKYUJauJT1tJOxlvB9vetkH+sR8m7NE+cGF/RgiczWJVDfMVCAdSwxqkIhXICIBtZFJ5X7QdVrm9bEZ70I+Dx6tIJT+3VoTDla2gwJ05zc5Yqyi1YxqLSBLy+3qg6utEnv/0sB/ZZed+IUtfeAhigHxZMDd5aeA6Jifbv5aXCwh2Df+w+smVpX9Amp6JTpDuJBDmdBmcF/UGjRy7rNCvTa/viV3JjQY/161sVSAc64FpS/bW7bmVPk2L6jMY2xC8mu+2m59z8CAa2Z+VlncXcgEy/3JdHGV37YRiaqsLSFQgmh5Cty7N0Cu15NMAlIUqib9ofzPQgoDlqQyrLzAu9aa2KiSwYn6wYdacyteFqdw2K/+a7VK2/MBJl3raNUSBibY++a6xybXOOXAJG+oHqEuBMGdSVm05V61+/yiM/6tKJt9ieUQ9XH8NgCqaP9tDlwNg8sKkiNMkza7TPfi6xt+5VTQW47h/WffHj/cg5LiWrwlOIn7C0zZ2h/XiAFL/DyMoYDGBdvc3enXnJZ3bVto62MgsNiLHdaXRiDsAUb8CkjG/L6jGen19ZaaRNnLJIx0sr9he7/Z0tL4sr17hbjJVxq0kaXEoWC06IjgwrWo42vhVh8njCpk5oSuduFMmfSmjZ2u7vxZDzrfu68nfejmkx/JXV7SREL6mbfoEbfAcT2Pp8AqckO4hL/jtwr6oLVY842HM3Oa94bCcqrJhafKltDA+A+/m/apKsBtOZ/6jDptbftMeOoZGuiXaft1uWcJEu4H7SfGKvXNMlfnuwwPU+wNetPF3jFrHs/5VPPLijSyEHJbvOROgWzMNWFL4Alqr7q15sCcAKLJnDsPj17ln8kno5q/U
+  template:
+    metadata:
+      creationTimestamp: null
+      name: ljreg
+      namespace: accord-dev
+    type: kubernetes.io/dockerconfigjson
+
