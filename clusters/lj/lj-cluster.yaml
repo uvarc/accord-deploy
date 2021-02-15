@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     path: clusters/lj/templates
-    repoURL: https://github.com/uvarc/accord-deploy.git
+    repoURL: https://github.com/parsley42/accord-deploy.git
     targetRevision: HEAD
   syncPolicy:
     automated:
