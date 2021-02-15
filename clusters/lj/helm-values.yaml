@@ -1,5 +1,5 @@
 appDomain: "portal.linuxjedi.org"
-envUrl: "accord-devel"
+envUrl: "accord-dev"
 volumes:
   mongo:
     size: "5Gi"

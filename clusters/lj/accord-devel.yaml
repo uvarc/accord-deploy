@@ -20,7 +20,7 @@ spec:
       - name: "appDomain"
         value: "portal.linuxjedi.org"
       - name: "envUrl"
-        value: "accord-devel"
+        value: "accord-dev"
       values: |
         volumes:
           mongo:
