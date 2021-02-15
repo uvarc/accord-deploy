@@ -1,0 +1,20 @@
+appDomain: "portal.linuxjedi.org"
+envUrl: "accord-dev"
+volumes:
+  mongo:
+    size: "5Gi"
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-tls-secret: admin/linuxjedi-ca-cert
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+userPods:
+  storage:
+    home:
+      prefix: "/remote/home"
+    project:
+      type: "none"
+  envoy:
+    match:
+      headers:
+        name: 'ssl-client-subject-dn'
+        prefix_match: 'CN=<SHORTUSER>,'

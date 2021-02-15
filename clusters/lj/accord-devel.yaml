@@ -1,0 +1,46 @@
+# Application definition for doing "in situ" development
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: accord-dev
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: accord-dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: accord-dev
+    repoURL: https://github.com/parsley42/accord-deploy.git
+    targetRevision: HEAD
+    helm:
+      parameters:
+      - name: "appDomain"
+        value: "portal.linuxjedi.org"
+      - name: "envUrl"
+        value: "accord-dev"
+      values: |
+        volumes:
+          mongo:
+            size: "5Gi"
+        ingress:
+          annotations:
+            nginx.ingress.kubernetes.io/auth-tls-secret: admin/linuxjedi-ca-cert
+            nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+        userPods:
+          storage:
+            home:
+              prefix: "/remote/home"
+            project:
+              type: "none"
+          envoy:
+            match:
+              headers:
+                name: "ssl-client-subject-dn"
+                prefix_match: "CN=<SHORTUSER>,"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
