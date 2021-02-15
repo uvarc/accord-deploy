@@ -3,11 +3,6 @@ envUrl: "accord-devel"
 volumes:
   mongo:
     size: "5Gi"
-images:
-  accord_service:
-    repository: "quay.io/accord/docker-python-image"
-    tag: "latest"
-    stdin: true
 ingress:
   annotations:
     nginx.ingress.kubernetes.io/auth-tls-secret: admin/linuxjedi-ca-cert
