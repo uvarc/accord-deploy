@@ -10,7 +10,7 @@ data:
    PODLIB_NAMESPACE: "{{ .Release.Namespace }}"
    PODLIB_INCLUSTER: "true"
    PODLIB_CONFIG: "userpod"
-   APP_URL: "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"
+   APP_URL: "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}?"
    SETTINGS_JSON: |
       {"ENV": "local", "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":"", "CLIENT_SECRET":"", "SSO_UID":"false", "CORS_ENABLED":"true", "DEBUG":"true", "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}}
 ---
