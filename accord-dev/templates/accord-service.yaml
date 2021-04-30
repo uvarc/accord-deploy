@@ -80,6 +80,17 @@ spec:
         volumeMounts:
         - name: accord-service-connections-json
           mountPath: /etc/private/accord
+        env:
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: MONGO_USER
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: MONGO_PASSWORD
       volumes:
       - name: accord-service-connections-json
         configMap:
