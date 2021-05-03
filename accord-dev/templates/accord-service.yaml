@@ -14,7 +14,7 @@ data:
 #   SETTINGS_JSON: |
 #      {"ENV": "local", "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":"", "CLIENT_SECRET":"", "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}}
    SETTINGS_JSON: |
-      {“ENV”: “dev”,“MONGODB”: {“HOSTS”:[“mongo”], “PORT”:“27017”},“INCOMMON_SSO”: {“HOSTS”:[“”], “PORT”:“”, “CLIENT_ID”:“”, “CLIENT_SECRET”:“”}, “SSO_UID”:false, “CORS_ENABLED”:true, “DEBUG”:true, “API_URL”:"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", “SITE_URL”:"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
+      {“ENV”: “dev”, “MONGODB”: {“HOSTS”:[“mongo”], “PORT”:“27017”}, “INCOMMON_SSO”: {“HOSTS”:[“”], “PORT”:“”, “CLIENT_ID”:“”, “CLIENT_SECRET”:“”}, “SSO_UID”:false, “CORS_ENABLED”:true, “DEBUG”:true, “API_URL”:"https://accord-dev.uvarc.io", “SITE_URL”:"https://accord-dev.uvarc.io"}
 ---
 # accord-service connections configuration
 apiVersion: v1
