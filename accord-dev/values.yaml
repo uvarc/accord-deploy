@@ -36,6 +36,10 @@ volumeClass: "longhorn"
 volumes:
   mongo:
     size: 40Gi
+    
+# Registry
+registry: "quay.io"
+registry_org: "accord"
 
 # User Pod Configuration
 userPods:
