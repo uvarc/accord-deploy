@@ -12,6 +12,11 @@ data:
   PROJECT_FORMAT: "{{ .Values.userPods.storage.project.format }}"
   POD_DOMAIN: "{{ .Values.appDomain }}"
   ENVOY_CONTAINER: "{{ .Values.images.envoy.repository }}:{{ .Values.images.envoy.tag }}"
+  REGISTRY: "{{ .Values.registry }}"
+  REGISTRY_ORG: "{{ .Values.registry_org }}"
+  ENVOY_EXTERNAL: "{{ .Values.userPods.envoy.externalPort }}"
+  ENVOY_ADMIN: "{{ .Values.userPods.envoy.adminPort }}"
+  
   ENVOY_TEMPLATE: |
     admin:
       access_log_path: /tmp/admin_access.log
