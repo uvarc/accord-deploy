@@ -17,7 +17,7 @@ images:
     tag: "develop"
     stdin: false
   accord_service:
-    repository: quay.io/accord/pods-service
+    repository: quay.io/accord/accord-service
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "develop"
