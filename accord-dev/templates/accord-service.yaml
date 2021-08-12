@@ -80,7 +80,7 @@ spec:
         volumeMounts:
         - name: accord-service-connections-json
           mountPath: /etc/private/accord
-        - mountPath: /home/accord-users.json
+        - mountPath: /home
           name: home
         env:
         - name: MONGO_USER
@@ -99,8 +99,8 @@ spec:
           name: accord-service-connections-json
       - name: home
         hostPath:
-          path: /home/accord-users.json
-          type: File
+          path: /home
+          type: Directory
 ---
 # accord-service service
 apiVersion: v1
