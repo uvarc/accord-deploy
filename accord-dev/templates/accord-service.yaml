@@ -93,6 +93,8 @@ spec:
             secretKeyRef:
               name: mongo-secrets
               key: MONGO_PASSWORD
+      nodeSelector:
+        kubernetes.io/hostname: ip-172-29-0-158.ec2.internal
       volumes:
       - name: accord-service-connections-json
         configMap:
