@@ -93,6 +93,16 @@ spec:
             secretKeyRef:
               name: mongo-secrets
               key: MONGO_PASSWORD
+        - name: METAACCESS_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: accord-service-secrets
+              key: METAACCESS_CLIENT_ID
+        - name: METAACCESS_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: accord-service-secrets
+              key: METAACCESS_CLIENT_SECRET
       nodeSelector:
         kubernetes.io/hostname: ip-172-29-0-158.ec2.internal
       volumes:
