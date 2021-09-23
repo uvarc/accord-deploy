@@ -63,3 +63,4 @@ metadata:
     interface: "pcore"
     class: "userpod"
   name: "pcore-base"
+  namespace: {{ .Release.Namespace }}
