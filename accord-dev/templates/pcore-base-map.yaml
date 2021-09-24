@@ -59,8 +59,8 @@ data:
     project:x:<PGID>:
 metadata:
   labels:
-    workload: "pcore"
-    interface: "theiapcore"
+    workload: "python"
+    interface: "theia-7"
     class: "userpod"
-  name: "pcore-base"
+  name: "theia-python-7"
   namespace: {{ .Release.Namespace }}
