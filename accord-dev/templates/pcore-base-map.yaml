@@ -60,7 +60,7 @@ data:
 metadata:
   labels:
     workload: "pcore"
-    interface: "pcore"
+    interface: "theiapcore"
     class: "userpod"
   name: "pcore-base"
   namespace: {{ .Release.Namespace }}
