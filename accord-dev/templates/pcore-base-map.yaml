@@ -59,7 +59,7 @@ data:
     project:x:<PGID>:
 metadata:
   labels:
-    workload: "python"
+    workload: "python-theia7"
     interface: "theia-7"
     class: "userpod"
   name: "theia-python-7"
