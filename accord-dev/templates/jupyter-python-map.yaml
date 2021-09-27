@@ -1,7 +1,7 @@
 apiVersion: "v1"
 kind: "ConfigMap"
 data:
-  port: "3000"
+  port: "8888"
   passwd: |
     root:x:0:0:root:/root:/bin/bash
     bin:x:1:1:bin:/bin:/sbin/nologin
@@ -59,8 +59,7 @@ data:
     project:x:<PGID>:
 metadata:
   labels:
-    workload: "python-theia7"
-    interface: "theia-7"
+    workload: "python"
+    interface: "jupyter"
     class: "userpod"
-  name: "theia-python-7"
-  namespace: {{ .Release.Namespace }}
+  name: "jupyter-python"
