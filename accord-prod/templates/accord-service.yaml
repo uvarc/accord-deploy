@@ -1,0 +1,152 @@
+---
+# accord-service podlib and mongo configuration
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: accord-service-configmap
+  namespace: {{ .Release.Namespace }}
+data:
+   BUILD_ENV: "prod"
+   PODLIB_NAMESPACE: "{{ .Release.Namespace }}"
+   PODLIB_INCLUSTER: "true"
+   PODLIB_CONFIG: "userpods"
+   APP_URL: "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}?"
+   SETTINGS_JSON: | 
+      {"ENV": "dev", "USERPOD_VERSION": "develop", "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":"", "CLIENT_SECRET":"c2Zhc2RnJmYzNDUhd2VydHd0NTM0dHJ3ZUAjc2RmCg=="}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
+---
+# accord-service connections configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: accord-service-connections-json
+  namespace: {{ .Release.Namespace }}
+data:
+  connections.json: |
+    {
+      "ENV": "dev",
+      "ELASTIC_SEARCH": {
+        "HOSTS": ["localhost"],
+        "PORT": "9200",
+        "CLIENT_ID": "",
+        "CLIENT_SECRET": ""
+      },
+      "INCOMMON_SSO": {
+        "HOSTS": [""],
+        "PORT": "",
+        "CLIENT_ID": "",
+        "CLIENT_SECRET": ""
+      },
+      "SMTP": {
+        "HOSTS": ["localhost"],
+        "PORT": "25",
+        "CLIENT_ID": "",
+        "CLIENT_SECRET": ""
+      },
+      "AMAZON_S3": {
+        "HOSTS": ["s3.amazonaws.com"],
+        "PORT": "",
+        "CLIENT_ID": "",
+        "CLIENT_SECRET": ""
+      }
+    }
+---
+# accord-service deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: accord-service
+  name: accord-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: accord-service
+  template:
+    metadata:
+      labels:
+        app: accord-service
+    spec:
+      containers:
+      - image: "{{ .Values.images.accord_service.repository }}:{{ .Values.images.accord_service.tag }}"
+        name: accord-service
+        imagePullPolicy: "{{ .Values.images.accord_service.pullPolicy }}"
+        command:
+        - /usr/bin/supervisord
+        envFrom:
+        - configMapRef:
+            name: accord-service-configmap
+        volumeMounts:
+        - name: accord-service-connections-json
+          mountPath: /etc/private/accord
+        - mountPath: /home
+          name: home
+        env:
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: MONGO_USER
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: MONGO_PASSWORD
+        - name: METAACCESS_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: accord-service-secrets
+              key: METAACCESS_CLIENT_ID
+        - name: METAACCESS_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: accord-service-secrets
+              key: METAACCESS_CLIENT_SECRET
+      nodeSelector:
+        kubernetes.io/hostname: ip-172-29-0-158.ec2.internal
+      volumes:
+      - name: accord-service-connections-json
+        configMap:
+          name: accord-service-connections-json
+      - name: home
+        hostPath:
+          path: /home
+          type: Directory
+---
+# accord-service service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: accord-service
+  name: accord-service-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports:
+    - name: "accord-service-port"
+      port: 80
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: accord-service
+---
+# accord-service ingress definition
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: accord-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  rules:
+  - host: "{{ .Values.envUrl }}.{{ .Values.appDomain }}"
+    http:
+      paths:
+      - path: /accord/api/
+        backend:
+          serviceName: accord-service-service
+          servicePort: 80
