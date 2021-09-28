@@ -111,7 +111,7 @@ spec:
           name: accord-service-connections-json
       - name: home
         hostPath:
-          path: /home
+          path: /accord
           type: Directory
 ---
 # accord-service service
