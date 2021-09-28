@@ -35,7 +35,7 @@ volumeClass: "longhorn"
 
 volumes:
   mongo:
-    size: 40Gi
+    size: 150Gi
     
 # Registry
 registry: "quay.io"
