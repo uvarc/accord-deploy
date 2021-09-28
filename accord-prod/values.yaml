@@ -24,7 +24,7 @@ images:
     # For doing in-cluster development
     stdin: false
   mongo:
-    repository: mongo
+    repository: quay.io/accord/accord-mongo
     tag: "latest"
   envoy:
     repository: "docker.io/envoyproxy/envoy"
@@ -35,7 +35,7 @@ volumeClass: "longhorn"
 
 volumes:
   mongo:
-    size: 150Gi
+    size: 50Gi
     
 # Registry
 registry: "quay.io"
