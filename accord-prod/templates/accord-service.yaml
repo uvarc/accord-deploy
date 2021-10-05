@@ -10,6 +10,8 @@ data:
    PODLIB_NAMESPACE: "{{ .Release.Namespace }}"
    PODLIB_INCLUSTER: "true"
    PODLIB_CONFIG: "userpods"
+   HTTP_PROXY: "http://figgis-s.hpc.virginia.edu:8080"
+   HTTPS_PROXY: "http://figgis-s.hpc.virginia.edu:8080"
    APP_URL: "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}?"
    SETTINGS_JSON: | 
       {"ENV": "prod", "USERPOD_VERSION": "latest", "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":"", "CLIENT_SECRET":"c2Zhc2RnJmYzNDUhd2VydHd0NTM0dHJ3ZUAjc2RmCg=="}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
