@@ -27,8 +27,8 @@ images:
     repository: mongo
     tag: "latest"
   envoy:
-    repository: "docker.io/envoyproxy/envoy"
-    tag: "v1.16-latest"
+    repository: "quay.io/accord/envoy"
+    tag: "latest"
 
 # Class for PVCs
 volumeClass: "longhorn"
