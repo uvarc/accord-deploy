@@ -105,8 +105,8 @@ spec:
             secretKeyRef:
               name: accord-service-secrets
               key: METAACCESS_CLIENT_SECRET
-      nodeSelector:
-        kubernetes.io/hostname: ip-172-29-0-158.ec2.internal
+#      nodeSelector:
+#        kubernetes.io/hostname: 
       volumes:
       - name: accord-service-connections-json
         configMap:
