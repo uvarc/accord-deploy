@@ -6,13 +6,13 @@ metadata:
   name: accord-service-configmap
   namespace: {{ .Release.Namespace }}
 data:
-  BUILD_ENV: "prod"
-  PODLIB_NAMESPACE: "{{ .Release.Namespace }}"
-  PODLIB_INCLUSTER: "true"
-  PODLIB_CONFIG: "userpods"
-  APP_URL: "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}?"
-  SETTINGS_JSON: | 
-    {"ENV": "dev", "USERPOD_VERSION": "develop", "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":""}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
+   BUILD_ENV: "prod"
+   PODLIB_NAMESPACE: "{{ .Release.Namespace }}"
+   PODLIB_INCLUSTER: "true"
+   PODLIB_CONFIG: "userpods"
+   APP_URL: "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}?"
+   SETTINGS_JSON: | 
+      {"ENV": "dev", "USERPOD_VERSION": "develop", "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":"", "CLIENT_SECRET":"c2Zhc2RnJmYzNDUhd2VydHd0NTM0dHJ3ZUAjc2RmCg=="}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
 ---
 # accord-service connections configuration
 apiVersion: v1
@@ -76,7 +76,7 @@ spec:
         - /usr/bin/supervisord
         envFrom:
         - configMapRef:
-          name: accord-service-configmap
+            name: accord-service-configmap
         volumeMounts:
         - name: accord-service-connections-json
           mountPath: /etc/private/accord
@@ -103,11 +103,6 @@ spec:
             secretKeyRef:
               name: accord-service-secrets
               key: METAACCESS_CLIENT_SECRET
-        - name: JWT_AUTH_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: accord-service-jwt-auth-secrets
-              key: JWT_AUTH_TOKEN
       nodeSelector:
         kubernetes.io/hostname: ip-172-29-0-158.ec2.internal
       volumes:
