@@ -103,11 +103,6 @@ spec:
             secretKeyRef:
               name: accord-service-secrets
               key: METAACCESS_CLIENT_SECRET
-        - name: JWT_AUTH_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: accord-service-secrets
-              key: JWT_AUTH_TOKEN
       nodeSelector:
         kubernetes.io/hostname: ip-172-29-0-158.ec2.internal
       volumes:
