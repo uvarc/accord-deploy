@@ -14,7 +14,7 @@ data:
    HTTPS_PROXY: "http://figgis-s.hpc.virginia.edu:8080"
    APP_URL: "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}?"
    SETTINGS_JSON: | 
-      {"ENV": "prod", "USERPOD_VERSION": "latest", "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":"", "CLIENT_SECRET":"c2Zhc2RnJmYzNDUhd2VydHd0NTM0dHJ3ZUAjc2RmCg=="}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
+      {"ENV": "prod", "USERPOD_VERSION": "latest", "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":""}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
 ---
 # accord-service connections configuration
 apiVersion: v1
@@ -105,6 +105,11 @@ spec:
             secretKeyRef:
               name: accord-service-secrets
               key: METAACCESS_CLIENT_SECRET
+        - name: JWT_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: jwt-auth-secret
+              key: JWT_AUTH_TOKEN
 #      nodeSelector:
 #        kubernetes.io/hostname: 
       volumes:
