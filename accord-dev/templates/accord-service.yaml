@@ -106,7 +106,7 @@ spec:
         - name: JWT_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
-              name: accord-service-secrets
+              name: jwt-auth-secret
               key: JWT_AUTH_TOKEN
       nodeSelector:
         kubernetes.io/hostname: ip-172-29-0-158.ec2.internal
