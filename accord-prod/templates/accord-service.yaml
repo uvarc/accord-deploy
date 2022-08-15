@@ -14,7 +14,7 @@ data:
    HTTPS_PROXY: "http://figgis-s.hpc.virginia.edu:8080"
    APP_URL: "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}?"
    SETTINGS_JSON: | 
-      {"ENV": "prod", "USERPOD_VERSION": "latest", "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":""}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
+      {"ENV": "prod", "USERPOD_VERSION": "latest", "KUBE_RESOURCE_CONFIG": {"main": {"Tier-1": {"requests": {"cpu": "1500m", "memory": "15Gi"},"limits": {"cpu": "1500m", "memory": "15Gi"}}, "Tier-2": {"requests": {"cpu": "3500m", "memory": "31Gi"}, "limits": {"cpu": "3500m", "memory": "31Gi"}}, "Tier-3": {"requests": {"cpu": "7500m", "memory": "31Gi"}, "limits": {"cpu": "7500m", "memory": "63Gi"}}, "Tier-4": {"requests": {"cpu": "15500m", "memory": "63Gi"}, "limits": {"cpu": "15500m", "memory": "63Gi"}}}, "side-car": {"requests": {"cpu": "100m", "memory": "1Gi"},"limits": {"cpu": "500m", "memory": "1Gi"}}}, "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":""}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
 ---
 # accord-service connections configuration
 apiVersion: v1

@@ -12,7 +12,7 @@ data:
    PODLIB_CONFIG: "userpods"
    APP_URL: "https://{{ .Values.envUrl }}.{{ .Values.appDomain }}?"
    SETTINGS_JSON: | 
-      {"ENV": "dev", "USERPOD_VERSION": "develop", "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":""}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
+      {"ENV": "dev", "USERPOD_VERSION": "develop", "KUBE_RESOURCE_CONFIG": {"main": {"Tier-1": {"requests": {"cpu": "100m", "memory": "500Mi"},"limits": {"cpu": "200m", "memory": "1Gi"}}, "Tier-2": {"requests": {"cpu": "100m", "memory": "500Mi"},"limits": {"cpu": "200m", "memory": "1Gi"}}, "Tier-3": {"requests": {"cpu": "100m", "memory": "500Mi"},"limits": {"cpu": "200m", "memory": "1Gi"}}, "Tier-4": {"requests": {"cpu": "100m", "memory": "500Mi"},"limits": {"cpu": "200m", "memory": "1Gi"}}}, "side-car": {"requests": {"cpu": "100m", "memory": "100Mi"},"limits": {"cpu": "100m", "memory": "500Mi"}}}, "META_ACCESS": {"HOSTS":["gears.opswat.com"], "PORT":"443"}, "MONGODB": {"HOSTS":["mongo"], "PORT":"27017"}, "AWS": {"HOSTS":[""], "PORT":"",  "CIDR_BLOCKS_TBL": "accord-blocks-dev"}, "INCOMMON_SSO": {"HOSTS": [""], "PORT":"", "CLIENT_ID":""}, "SSO_UID":false, "CORS_ENABLED":true, "DEBUG":true, "API_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}", "SITE_URL":"https://{{ .Values.envUrl }}.{{ .Values.appDomain }}"}
 ---
 # accord-service connections configuration
 apiVersion: v1
@@ -155,3 +155,4 @@ spec:
         backend:
           serviceName: accord-service-service
           servicePort: 80
+
