@@ -2,3 +2,5 @@ templates-orig
 holding
 secrets
 /.project
+.DS_Store
+.gitignore
