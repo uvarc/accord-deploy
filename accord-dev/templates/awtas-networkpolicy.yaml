@@ -1,0 +1,18 @@
+---
+# allow-accord-web-to-accord-service
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-accord-web-to-accord-service
+  namespace: accord-dev
+spec:
+  podSelector:
+    matchLabels:
+      app: accord-service
+  ingress:
+  - ports:
+    - port: 5000
+    from:
+    - podSelector:
+        matchLabels:
+          app: accord-web
